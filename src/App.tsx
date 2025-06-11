@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './hooks/useAuth';
 import { AuthPage } from './pages/AuthPage';
 import { Dashboard } from './pages/Dashboard';
 import { BookView } from './pages/BookView';
+import { NotesPage } from './pages/NotesPage';
 import { Layout } from './components/Layout';
 import { Sidebar } from './components/Sidebar';
 import { Book } from './types';
@@ -33,10 +34,10 @@ function AppContent() {
       <div className="flex-1 flex flex-col">
         <Layout>
           {activeTab === 'dashboard' && (
-            <Dashboard />
+            <Dashboard onSelectBook={setSelectedBook} />
           )}
           {activeTab === 'books' && (
-            <Dashboard />
+            <Dashboard onSelectBook={setSelectedBook} />
           )}
           {activeTab === 'statistics' && (
             <div className="text-center py-12">
@@ -61,6 +62,9 @@ function AppContent() {
               <h2 className="text-2xl font-bold text-gray-900 mb-4">Objets</h2>
               <p className="text-gray-600">Vue globale des objets en cours de développement</p>
             </div>
+          )}
+          {activeTab === 'notes' && (
+            <NotesPage />
           )}
           {activeTab === 'settings' && (
             <div className="text-center py-12">

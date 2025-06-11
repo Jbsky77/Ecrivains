@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Book, BarChart3, Users, MapPin, Package, Settings } from 'lucide-react';
+import { Home, Book, BarChart3, Users, MapPin, Package, Settings, StickyNote } from 'lucide-react';
 
 interface SidebarProps {
   activeTab?: string;
@@ -13,6 +13,7 @@ const navigation = [
   { id: 'characters', name: 'Personnages', icon: Users },
   { id: 'locations', name: 'Lieux', icon: MapPin },
   { id: 'objects', name: 'Objets', icon: Package },
+  { id: 'notes', name: 'Bloc-notes', icon: StickyNote },
   { id: 'settings', name: 'Paramètres', icon: Settings },
 ];
 
