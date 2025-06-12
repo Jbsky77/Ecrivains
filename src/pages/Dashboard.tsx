@@ -8,11 +8,10 @@ import { ProgressBar } from '../components/ProgressBar';
 import { Book } from '../types';
 import { calculateProgress, formatWordCount } from '../utils/wordCount';
 
-export function Dashboard() {
+export function Dashboard({ onSelectBook }: { onSelectBook?: (book: Book) => void }) {
   const { books, createBook, deleteBook } = useBooks();
   const { user } = useAuth();
   const [showCreateModal, setShowCreateModal] = useState(false);
-  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
   const [newBookData, setNewBookData] = useState({
     title: '',
     genre: '',
@@ -169,7 +168,7 @@ export function Dashboard() {
               <BookCard
                 key={book.id}
                 book={book}
-                onClick={() => setSelectedBook(book)}
+                onClick={() => onSelectBook?.(book)}
                 onEdit={() => {/* TODO: Open edit modal */}}
                 onDelete={() => handleDeleteBook(book.id)}
               />
