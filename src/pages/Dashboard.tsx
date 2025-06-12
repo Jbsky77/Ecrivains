@@ -8,7 +8,17 @@ import { ProgressBar } from '../components/ProgressBar';
 import { Book } from '../types';
 import { calculateProgress, formatWordCount } from '../utils/wordCount';
 
-export function Dashboard() {
+interface DashboardProps {
+  /**
+   * Optional project information. Some consumers of this component
+   * pass a `project` or `projectId` prop. Typing these props avoids
+   * TypeScript errors without affecting existing behaviour.
+   */
+  project?: unknown;
+  projectId?: string;
+}
+
+export function Dashboard({ project, projectId }: DashboardProps) {
   const { books, createBook, deleteBook } = useBooks();
   const { user } = useAuth();
   const [showCreateModal, setShowCreateModal] = useState(false);
