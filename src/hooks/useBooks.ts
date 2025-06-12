@@ -113,6 +113,14 @@ export function useBooks() {
     setBooks(prev => prev.filter(book => book.id !== bookId));
   };
 
+  const clearBooks = () => {
+    setBooks([]);
+  };
+
+  const manualSave = () => {
+    setBooks(prev => [...prev]);
+  };
+
   const addChapter = (bookId: string, chapterData: Omit<Chapter, 'id' | 'createdAt' | 'updatedAt'>) => {
     const newChapter: Chapter = {
       ...chapterData,
@@ -242,6 +250,8 @@ export function useBooks() {
     addCharacter,
     updateCharacter,
     addLocation,
-    addObject
+    addObject,
+    clearBooks,
+    manualSave
   };
 }
