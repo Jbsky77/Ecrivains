@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, TrendingUp, BookOpen, Target, Calendar } from 'lucide-react';
+import { Plus, TrendingUp, BookOpen, Target, Calendar, Save, Trash2 } from 'lucide-react';
 import { useBooks } from '../hooks/useBooks';
 import { useAuth } from '../hooks/useAuth';
 import { BookCard } from '../components/BookCard';
@@ -9,7 +9,7 @@ import { Book } from '../types';
 import { calculateProgress, formatWordCount } from '../utils/wordCount';
 
 export function Dashboard({ onSelectBook }: { onSelectBook?: (book: Book) => void }) {
-  const { books, createBook, deleteBook } = useBooks();
+  const { books, createBook, deleteBook, manualSave, clearBooks } = useBooks();
   const { user } = useAuth();
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [newBookData, setNewBookData] = useState({
@@ -39,6 +39,17 @@ export function Dashboard({ onSelectBook }: { onSelectBook?: (book: Book) => voi
   const handleDeleteBook = (bookId: string) => {
     if (window.confirm('Êtes-vous sûr de vouloir supprimer ce livre ?')) {
       deleteBook(bookId);
+    }
+  };
+
+  const handleManualSave = () => {
+    manualSave();
+    alert('Sauvegarde effectuée');
+  };
+
+  const handleClearBooks = () => {
+    if (window.confirm('Supprimer tous les projets ?')) {
+      clearBooks();
     }
   };
 
@@ -143,6 +154,20 @@ export function Dashboard({ onSelectBook }: { onSelectBook?: (book: Book) => voi
           <h2 className="text-2xl font-bold text-gray-900">Mes Projets</h2>
           <div className="flex items-center space-x-2 text-sm text-gray-500">
             <span>{books.length} projet{books.length > 1 ? 's' : ''}</span>
+            <button
+              onClick={handleManualSave}
+              className="flex items-center space-x-1 px-2 py-1 bg-gray-100 rounded hover:bg-gray-200"
+            >
+              <Save className="w-4 h-4" />
+              <span>Sauvegarder</span>
+            </button>
+            <button
+              onClick={handleClearBooks}
+              className="flex items-center space-x-1 px-2 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span>Tout supprimer</span>
+            </button>
           </div>
         </div>
 
