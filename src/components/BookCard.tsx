@@ -80,6 +80,25 @@ export function BookCard({ book, onClick, onEdit, onDelete }: BookCardProps) {
               <span>{book.chapters.length} chapitres</span>
             </div>
           </div>
+
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (
+                  window.confirm(
+                    'Êtes-vous sûr de vouloir supprimer ce projet ?'
+                  )
+                ) {
+                  onDelete();
+                }
+              }}
+              className="flex items-center text-xs text-red-600 bg-red-50 hover:bg-red-100 px-2 py-1 rounded"
+            >
+              <Trash2 className="w-3 h-3 mr-1" />
+              Supprimer
+            </button>
+          </div>
         </div>
       </div>
     </div>
